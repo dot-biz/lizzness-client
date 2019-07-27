@@ -53,9 +53,11 @@ func _cx_end():
 	print('Connection ended!')
 
 func _request_join_room(room_code):
+	print('Requesting to join room %s' % str(room_code))
 	client_obj.join_room(room_code)
 
 func _room_joined(room_code):
+	print('Server order to join room %s' % str(room_code))
 	var old_ui = get_node('/root/UI')
 	old_ui.set_name('UI_UNLOADING')
 	var new_ui = preload('res://LobbyUI.tscn').instance()
@@ -65,6 +67,7 @@ func _room_joined(room_code):
 	new_ui.initialize(room_code)
 
 func _request_create_room(game_name):
+	print('Requesting new room for %s' % game_name)
 	client_obj.create_room(game_name)
 
 func _process(delta):
