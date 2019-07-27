@@ -29,6 +29,7 @@ func addItem(value):
 	$ScrollContainer/list.add_child(item)
 	
 func update_players(players):
+	$ScrollContainer/list.queue_free()
 	for player in players:
 		addItem(player['nick'])
 	
