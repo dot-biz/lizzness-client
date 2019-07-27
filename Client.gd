@@ -1,6 +1,7 @@
 extends Node
 
 var server_cx
+var client_obj
 
 func _ready():
 	var clients =  Node.new()
@@ -31,7 +32,7 @@ func _network_peer_connected(id):
 	print('Connected to new peer with id %s. Our network id is %s.' % [str(id), str(own_id)])
 	if id == 1:
 		print('\t> Connected to server. Creating client object at /clients/%s' % str(own_id))
-		var client_obj = preload('res://SingleClient.tscn').instance()
+		client_obj = preload('res://SingleClient.tscn').instance()
 		client_obj.set_name(str(own_id))
 		get_node('/root/clients').add_child(client_obj)
 		client_obj.initialize(id)
@@ -39,10 +40,18 @@ func _network_peer_connected(id):
 		get_node('/root/UI').destroy()
 		var rs_ui = preload('res://RoomSelectUI.tscn').instance()
 		rs_ui.set_name('UI')
+		rs_ui.connect('JOIN_ROOM', self, '_join_room')
+		rs_ui.connect('CREATE_ROOM', self, '_create_room')
 		get_tree().get_root().add_child(rs_ui)
 
 func _cx_end():
 	print('Connection ended!')
+
+func _join_room(room_code):
+	client_obj.join_room(room_code)
+
+func _create_room(game_name):
+	client_obj.create_room(game_name)
 
 func _process(delta):
 	if not server_cx:
