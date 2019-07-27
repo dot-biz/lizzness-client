@@ -6,7 +6,7 @@ var PC
 var startButton
 var listIndex = 0
 const ListItem = preload("res://ListItem.tscn")
-
+signal GAME_START_REQUEST
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rcbox = get_node('Panel/RCBox/RCText')

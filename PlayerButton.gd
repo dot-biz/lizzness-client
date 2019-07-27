@@ -1,9 +1,7 @@
 extends Button
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var player_id
+signal PLAYER_PRESSED
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,8 +10,7 @@ func _ready():
 #func _process(delta):
 #	pass
 func _initialize(player):
-	this.text = player['nick']
-	player_id = plaer['id']
+	player_id = player['id']
 
 func _on_Button_pressed():
 	emit_signal('PLAYER_PRESSED',player_id)

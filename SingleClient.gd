@@ -20,6 +20,10 @@ remote func create_game_response(pkt):
 	pass
 
 remote func join_game_response(pkt):
+	var game_node = Node.new()
+	game_node.set_name('games/%s' % pkt['id'])
+	game_node._initialize(pkt['id'])
+	emit_signal('ROOM_JOINED')
 	# Create /root/games/<id>
 	# call initialize(<id>) on that node
 	# emit ROOM_JOINED signal

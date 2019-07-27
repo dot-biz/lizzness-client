@@ -5,7 +5,8 @@ var exfiltrateButton
 var notexfiltrateButton
 var nightlabel
 var time
-
+signal EXFILTRATE_PRESSED
+signal NOT_EXFILTRATE_PRESSED
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	exfiltrateButton = get_node("Panel/Exfiltrate")
