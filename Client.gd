@@ -1,5 +1,7 @@
 extends Node
 
+signal PLAYER_LIST_CHANGE
+
 var server_cx
 var client_obj
 
@@ -34,23 +36,35 @@ func _network_peer_connected(id):
 		print('\t> Connected to server. Creating client object at /clients/%s' % str(own_id))
 		client_obj = preload('res://SingleClient.tscn').instance()
 		client_obj.set_name(str(own_id))
+		client_obj.connect('ROOM_JOINED', self, '_room_joined')
 		get_node('/root/clients').add_child(client_obj)
 		client_obj.initialize(id)
 		
-		get_node('/root/UI').destroy()
+		var old_ui = get_node('/root/UI')
+		old_ui.set_name('UI_UNLOADNIG')
+		old_ui.queue_free()
 		var rs_ui = preload('res://RoomSelectUI.tscn').instance()
 		rs_ui.set_name('UI')
-		rs_ui.connect('JOIN_ROOM', self, '_join_room')
-		rs_ui.connect('CREATE_ROOM', self, '_create_room')
+		rs_ui.connect('JOIN_ROOM', self, '_request_join_room')
+		rs_ui.connect('CREATE_ROOM', self, '_request_create_room')
 		get_tree().get_root().add_child(rs_ui)
 
 func _cx_end():
 	print('Connection ended!')
 
-func _join_room(room_code):
+func _request_join_room(room_code):
 	client_obj.join_room(room_code)
 
-func _create_room(game_name):
+func _room_joined(room_code):
+	var old_ui = get_node('/root/UI')
+	old_ui.set_name('UI_UNLOADING')
+	var new_ui = preload('res://LobbyUI.tscn').instance()
+	new_ui.set_name('UI')
+	self.connect('ENABLE_START', new_ui, '_enable_start')
+	get_tree().get_root().add_child(new_ui)
+	new_ui.initialize(room_code)
+
+func _request_create_room(game_name):
 	client_obj.create_room(game_name)
 
 func _process(delta):

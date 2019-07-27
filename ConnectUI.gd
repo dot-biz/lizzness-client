@@ -2,8 +2,8 @@ extends Control
 
 signal SERVER_CONNECT
 
-const HARDCODED_SERVER = 'localhost'
-const HARDCODED_PORT = '42069'
+const HARDCODED_SERVER = 'game.lizzness.biz'
+const HARDCODED_PORT = '12926'
 
 func _ready():
 	print('initiating connection to %s port %s' % [HARDCODED_SERVER, HARDCODED_PORT])
