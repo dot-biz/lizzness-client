@@ -9,10 +9,10 @@ const ListItem = preload("res://ListItem.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rcbox = get_node('RCBox/RCText')
-	PC = get_node('PC/PCText')
-	startButton = get_node('StartButton')
-
+	rcbox = get_node('Panel/RCBox/RCText')
+	PC = get_node('Panel/PC/PCText')
+	startButton = get_node('Panel/StartButton')
+	startButton.set_disabled(true)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
