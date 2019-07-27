@@ -32,4 +32,11 @@ func update_players(players):
 	$ScrollContainer/list.queue_free()
 	for player in players:
 		addItem(player['nick'])
+		
+func _enable_start():
+	startButton.set_disabled(false)
+
+
+func _on_StartButton_pressed():
 	
+	emit_signal('GAME_START_REQUEST')

@@ -63,3 +63,4 @@ margin_bottom = 289.0
 [node name="List" type="VScrollBar" parent="ScrollContainer"]
 margin_right = 12.0
 margin_bottom = 12.0
+[connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]
