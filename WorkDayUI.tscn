@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://WorkDayUI.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = -2.46753
+margin_top = 1.23375
+margin_right = 562.532
+margin_bottom = 601.234
+
+[node name="Header" type="Label" parent="Panel"]
+margin_left = 46.0
+margin_top = 33.3737
+margin_right = 540.0
+margin_bottom = 88.3737
+text = "DAY NUMBER | WORKDAY"
+align = 1
+valign = 1
+
+[node name="DummyText" type="Label" parent="Panel"]
+margin_left = 32.639
+margin_top = 197.684
+margin_right = 527.639
+margin_bottom = 332.684
+text = "At 5:00pm, PLAYERNAME will choose NUMBER people for the night shift"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+margin_left = 198.282
+margin_top = 371.626
+margin_right = 394.282
+margin_bottom = 467.626
+color = Color( 0.196078, 0.176471, 0.337255, 1 )
+
+[node name="Time" type="Label" parent="Panel/ColorRect"]
+margin_left = 41.2116
+margin_top = 16.4847
+margin_right = 154.212
+margin_bottom = 77.4847
+text = "12:00AM"
+align = 1
+valign = 1
