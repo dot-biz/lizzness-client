@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://NightUI.gd" type="Script" id=1]
+
+[node name="NightUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.17773
+margin_top = -1.1778
+margin_right = -1.17773
+margin_bottom = -1.1778
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 500.0
+margin_bottom = 586.0
+
+[node name="Exfiltrate" type="Button" parent="Panel"]
+margin_left = 76.5566
+margin_top = 309.76
+margin_right = 186.557
+margin_bottom = 358.76
+text = "Exfiltrate Data"
+
+[node name="NotExfiltrate" type="Button" parent="Panel"]
+margin_left = 312.115
+margin_top = 309.76
+margin_right = 422.115
+margin_bottom = 358.76
+text = "Be Nice"
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 105.29
+margin_top = 3.75472
+margin_right = 418.29
+margin_bottom = 69.7547
+text = "Night Number "
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+margin_left = 175.2
+margin_top = 166.934
+margin_right = 332.2
+margin_bottom = 252.934
+color = Color( 0.196078, 0.176471, 0.337255, 1 )
+
+[node name="Label" type="Label" parent="Panel/ColorRect"]
+margin_left = -1.17773
+margin_right = 156.822
+margin_bottom = 82.0
+text = "Time"
+align = 1
+valign = 1
+[connection signal="pressed" from="Panel/Exfiltrate" to="." method="_on_Exfiltrate_pressed"]
+[connection signal="pressed" from="Panel/NotExfiltrate" to="." method="_on_NotExfiltrate_pressed"]
