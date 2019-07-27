@@ -15,6 +15,7 @@ func _initialize(day, numpeople, players):
 	for player in players:
 		var PlayerButton = preload("res://PlayerButton.tscn").instance()
 		PlayerButton._initialize(player)
+		PlayerButton.text = player['id']
 		$Panel/CenterContainer/GridContainer.add_child(PlayerButton)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
