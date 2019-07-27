@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://EndOfDayUI.gd" type="Script" id=1]
+
+[node name="EndOfDayUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 527.0
+margin_bottom = 595.0
+
+[node name="Header" type="Label" parent="Panel"]
+margin_right = 527.0
+margin_bottom = 99.0
+text = "Day Number | End-Of-Day"
+align = 1
+valign = 1
+
+[node name="Statement" type="Label" parent="Panel"]
+margin_left = 2.89203
+margin_top = 102.668
+margin_right = 529.892
+margin_bottom = 175.668
+text = "Choose Number people for the Night Shift"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+margin_top = 288.0
+margin_right = 527.0
+margin_bottom = 288.0
+rect_min_size = Vector2( 527, 0 )
+
+[node name="GridContainer" type="GridContainer" parent="Panel/CenterContainer"]
+margin_left = 263.0
+margin_right = 263.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 24
+columns = 4
