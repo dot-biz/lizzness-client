@@ -45,5 +45,6 @@ margin_top = 303.0
 margin_right = 360.0
 margin_bottom = 331.0
 text = "Create a New Room"
+[connection signal="text_entered" from="Panel/RoomNumberLine" to="." method="_on_RoomNumberLine_text_entered"]
 [connection signal="pressed" from="Panel/JoinRoom" to="." method="_on_JoinRoom_pressed"]
 [connection signal="pressed" from="Panel/CreateRoom" to="." method="_on_CreateRoom_pressed"]

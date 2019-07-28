@@ -19,3 +19,9 @@ func _on_JoinRoom_pressed():
 func _on_CreateRoom_pressed():
 	if createRoom.text:
 		emit_signal("CREATE_ROOM", "Lizzness")
+
+func pre_destroy():
+	pass
+
+func _on_RoomNumberLine_text_entered(new_text):
+	emit_signal("JOIN_ROOM", int(new_text))

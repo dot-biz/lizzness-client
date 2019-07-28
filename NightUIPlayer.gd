@@ -27,3 +27,6 @@ func _on_Exfiltrate_pressed():
 
 func _on_NotExfiltrate_pressed():
 	emit_signal("NOT_EXFILTRATE_PRESSED") # Replace with function body.
+
+func pre_destroy():
+	pass

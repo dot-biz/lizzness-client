@@ -72,6 +72,7 @@ func _room_joined(room_code):
 	
 	get_tree().get_root().add_child(new_ui)
 	new_ui.initialize(client_obj, game_obj)
+	old_ui.queue_free()
 
 func _request_create_room(game_name):
 	print('Requesting new room for %s' % game_name)
@@ -84,3 +85,13 @@ func _process(delta):
 	if server_cx.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED \
 	or server_cx.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING:
 		server_cx.poll()
+
+func game_ui_change(new_ui_resource):
+	var new_ui = new_ui_resource.instance()
+	var old_ui = get_node('/root/UI')
+	old_ui.pre_destroy()
+	old_ui.set_name('UI_UNLOADING')
+	new_ui.set_name('UI')
+	get_tree().get_root().add_child(new_ui)
+	new_ui.initialize(client_obj, game_obj)
+	old_ui.queue_free()

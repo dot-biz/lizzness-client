@@ -22,3 +22,6 @@ func _initialize(day, numpeople, playername):
 	
 func _updateTimer(time):
 	Time.text = time
+
+func pre_destroy():
+	pass

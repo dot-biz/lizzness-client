@@ -18,3 +18,5 @@ func _initialize(day, numpeople, players):
 		PlayerButton.text = player['id']
 		$Panel/CenterContainer/GridContainer.add_child(PlayerButton)
 
+func pre_destroy():
+	pass

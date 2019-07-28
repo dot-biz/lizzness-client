@@ -41,3 +41,6 @@ func _player_list_change(players, MIN_PLAYERS, MAX_PLAYERS):
 
 func _on_StartButton_pressed():
 	emit_signal('GAME_START_REQUEST')
+
+func pre_destroy():
+	pass
