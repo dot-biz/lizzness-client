@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://VoteOff.gd" type="Script" id=1]
+
+[node name="VotOff" type="Button"]
+margin_right = 100.0
+margin_bottom = 50.0
+text = "Player Name"
+script = ExtResource( 1 )
+[connection signal="pressed" from="." to="." method="_on_VotOff_pressed"]

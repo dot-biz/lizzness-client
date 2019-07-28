@@ -17,6 +17,4 @@ func _initialize(day, numpeople, players):
 		PlayerButton._initialize(player)
 		PlayerButton.text = player['id']
 		$Panel/CenterContainer/GridContainer.add_child(PlayerButton)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
