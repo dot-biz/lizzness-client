@@ -39,7 +39,7 @@ func _network_peer_connected(id):
 		client_obj.set_name(str(own_id))
 		client_obj.connect('ROOM_JOINED', self, '_room_joined')
 		get_node('/root/clients').add_child(client_obj)
-		client_obj.initialize(id)
+		client_obj.initialize(id) #client object is each user
 		
 		var old_ui = get_node('/root/UI')
 		old_ui.set_name('UI_UNLOADNIG')
