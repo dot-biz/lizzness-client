@@ -1,6 +1,7 @@
 extends Node
 
 signal PLAYER_LIST_CHANGE
+signal ENABLE_START
 
 var server_cx
 var client_obj
