@@ -28,7 +28,7 @@ margin_left = 152.0
 margin_top = 167.0
 margin_right = 367.0
 margin_bottom = 207.0
-text = "Room Number"
+placeholder_text = "Room Number"
 
 [node name="JoinRoom" type="Button" parent="Panel"]
 margin_left = 161.0
