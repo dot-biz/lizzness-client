@@ -48,15 +48,15 @@ text = "Connected to Room ID"
 valign = 1
 
 [node name="StartButton" type="Button" parent="Panel"]
-margin_left = 411.274
-margin_top = 40.5513
-margin_right = 481.274
-margin_bottom = 60.5513
-text = "Start"
+margin_left = 20.8378
+margin_top = 296.0
+margin_right = 471.838
+margin_bottom = 323.0
+text = "Start Game"
 
 [node name="PlayerList" type="RichTextLabel" parent="Panel"]
-margin_left = 23.0
+margin_left = 20.0
 margin_top = 114.0
-margin_right = 466.0
-margin_bottom = 312.0
+margin_right = 473.0
+margin_bottom = 290.0
 [connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]

@@ -40,7 +40,7 @@ func _network_peer_connected(id):
 		client_obj.set_name(str(own_id))
 		client_obj.connect('ROOM_JOINED', self, '_room_joined')
 		get_node('/root/clients').add_child(client_obj)
-		client_obj.initialize(id) #client object is each user
+		client_obj.initialize(own_id) #client object is each user
 		
 		var old_ui = get_node('/root/UI')
 		old_ui.set_name('UI_UNLOADNIG')
@@ -65,11 +65,13 @@ func _room_joined(room_code):
 	var new_ui = preload('res://LobbyUI.tscn').instance()
 	new_ui.set_name('UI')
 	self.connect('ENABLE_START', new_ui, '_enable_start')
-	get_tree().get_root().add_child(new_ui)
-	new_ui.initialize(room_code)
 	
 	game_obj = get_node('/root/games/%s' % str(room_code))
 	game_obj.connect('PLAYER_LIST_CHANGE', new_ui, '_player_list_change')
+	new_ui.connect("GAME_START_REQUEST", game_obj, '_game_start_request')
+	
+	get_tree().get_root().add_child(new_ui)
+	new_ui.initialize(client_obj, game_obj)
 
 func _request_create_room(game_name):
 	print('Requesting new room for %s' % game_name)
