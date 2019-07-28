@@ -5,6 +5,7 @@ signal ENABLE_START
 
 var server_cx
 var client_obj
+var game_obj
 
 func _ready():
 	var clients =  Node.new()
@@ -66,6 +67,9 @@ func _room_joined(room_code):
 	self.connect('ENABLE_START', new_ui, '_enable_start')
 	get_tree().get_root().add_child(new_ui)
 	new_ui.initialize(room_code)
+	
+	game_obj = get_node('/root/games/%s' % str(room_code))
+	game_obj.connect('PLAYER_LIST_CHANGE', new_ui, '_player_list_change')
 
 func _request_create_room(game_name):
 	print('Requesting new room for %s' % game_name)
