@@ -8,7 +8,7 @@ export var MAX_PLAYERS: int = 8
 
 enum {STATE_LOBBY, STATE_PLAYING, STATE_DISSOLVING}
 enum {GAME_DAY_MORNING, GAME_DAY_WORKDAY, GAME_DAY_AFTERNOON, GAME_DAY_MIDNIGHT}
-enum CLIENT_ROLE {PLAYER, ADMIN, SCREEN}
+enum CLIENT_ROLE {GUEST, ADMIN, HOST}
 
 var game_state: int
 var day_number: int
@@ -28,6 +28,13 @@ func _ready():
 func initialize(player, room_code: int):
 	self.player = player
 	self.room_code = room_code
+	
+	var ui = null
+	
+	if player['role'] == CLIENT_ROLE.HOST:
+		ui = get_node('/root/Client').ui_change('res://Games/Lizzness/UI/Host/Lobby_HOST.tscn')
+	else:
+		ui = get_node('/root/Client').ui_change('res://Games/Lizzness/UI/Guest/Lobby_GUEST.tscn')
 
 remote func update_player_list(pkt):
 	print('Player list change - new list %s' % str(pkt['players']))

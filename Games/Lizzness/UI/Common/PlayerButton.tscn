@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Games/Lizzness/UI/Common/PlayerButton.gd" type="Script" id=1]
+
+[node name="PlayerButton" type="Button"]
+margin_right = 117.0
+margin_bottom = 39.0
+script = ExtResource( 1 )

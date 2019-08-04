@@ -14,7 +14,7 @@ func _ready():
 	var games = Node.new()
 	games.set_name('games')
 	
-	var connect_ui = preload('res://ConnectUI.tscn').instance()
+	var connect_ui = preload('res://UI/ServerConnect.tscn').instance()
 	connect_ui.connect('SERVER_CONNECT', self, '_attempt_server_connect')
 	connect_ui.set_name('UI')
 	
@@ -42,14 +42,9 @@ func _network_peer_connected(id):
 		get_node('/root/clients').add_child(client_obj)
 		client_obj.initialize(own_id) #client object is each user
 		
-		var old_ui = get_node('/root/UI')
-		old_ui.set_name('UI_UNLOADNIG')
-		old_ui.queue_free()
-		var rs_ui = preload('res://RoomSelectUI.tscn').instance()
-		rs_ui.set_name('UI')
-		rs_ui.connect('JOIN_ROOM', self, '_request_join_room')
-		rs_ui.connect('CREATE_ROOM', self, '_request_create_room')
-		get_tree().get_root().add_child(rs_ui)
+		var new_ui = self.ui_change_raw('res://UI/RoomSelect.tscn', [])
+		new_ui.connect('JOIN_ROOM', self, '_request_join_room')
+		new_ui.connect('CREATE_ROOM', self, '_request_create_room')
 
 func _cx_end():
 	print('Connection ended!')
@@ -58,21 +53,48 @@ func _request_join_room(room_code):
 	print('Requesting to join room %s' % str(room_code))
 	client_obj.join_room(room_code)
 
+func ui_change(path_to_new_ui):
+	#	Initiates a UI change while a game is in-progress, unloading the current
+	#	UI scene and loading an instance of the new one in its place. The new UI
+	#	is initialized with the current SingleClient and Game objects.
+	#	
+	#	Note that this method should only be used for GAME UI scenes, i.e. those
+	#	under /Games/<whatever>/UI. CORE UI scenes must be loaded with the
+	#	ui_change_raw() method.
+	emit_signal('UI_CHANGE')
+	
+	var old_ui = get_node('/root/UI')
+	old_ui.pre_destroy()
+	self.remove_child(old_ui)
+	old_ui.queue_free()
+	
+	var new_ui = load(path_to_new_ui).instance()
+	new_ui.set_name('UI')
+	self.add_child(new_ui)
+	new_ui.initialize(client_obj, game_obj)
+	
+	return new_ui
+
+func ui_change_raw(path_to_new_ui, params):
+	#	As ui_change, but for CORE UI scenes, i.e. those under /UI. The parameters
+	#	with which the new UI should be initialized are passed as `params`.
+	emit_signal('UI_CHANGE')
+	
+	if get_tree().get_root().has_node('UI'):
+		var old_ui = get_node('/root/UI')
+		old_ui.pre_destroy()
+		self.remove_child(old_ui)
+		old_ui.queue_free()
+	
+	var new_ui = load(path_to_new_ui).instance()
+	new_ui.set_name('UI')
+	self.add_child(new_ui)
+	new_ui.initialize(params)
+	
+	return new_ui
+
 func _room_joined(room_code):
 	print('Server order to join room %s' % str(room_code))
-	var old_ui = get_node('/root/UI')
-	old_ui.set_name('UI_UNLOADING')
-	var new_ui = preload('res://LobbyUI.tscn').instance()
-	new_ui.set_name('UI')
-	self.connect('ENABLE_START', new_ui, '_enable_start')
-	
-	game_obj = get_node('/root/games/%s' % str(room_code))
-	game_obj.connect('PLAYER_LIST_CHANGE', new_ui, '_player_list_change')
-	new_ui.connect("GAME_START_REQUEST", game_obj, '_game_start_request')
-	
-	get_tree().get_root().add_child(new_ui)
-	new_ui.initialize(client_obj, game_obj)
-	old_ui.queue_free()
 
 func _request_create_room(game_name):
 	print('Requesting new room for %s' % game_name)
@@ -85,13 +107,3 @@ func _process(delta):
 	if server_cx.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED \
 	or server_cx.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING:
 		server_cx.poll()
-
-func game_ui_change(new_ui_resource):
-	var new_ui = new_ui_resource.instance()
-	var old_ui = get_node('/root/UI')
-	old_ui.pre_destroy()
-	old_ui.set_name('UI_UNLOADING')
-	new_ui.set_name('UI')
-	get_tree().get_root().add_child(new_ui)
-	new_ui.initialize(client_obj, game_obj)
-	old_ui.queue_free()

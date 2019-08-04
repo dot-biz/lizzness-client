@@ -9,5 +9,8 @@ func _ready():
 	print('initiating connection to %s port %s' % [HARDCODED_SERVER, HARDCODED_PORT])
 	emit_signal('SERVER_CONNECT', HARDCODED_SERVER, HARDCODED_PORT)
 
+func initialize(params):
+	pass
+
 func pre_destroy():
 	pass

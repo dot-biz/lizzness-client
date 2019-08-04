@@ -20,6 +20,9 @@ func _on_CreateRoom_pressed():
 	if createRoom.text:
 		emit_signal("CREATE_ROOM", "Lizzness")
 
+func initialize(params):
+	pass
+
 func pre_destroy():
 	pass
 

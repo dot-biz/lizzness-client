@@ -13,9 +13,8 @@ func _initialize(day, numpeople, players):
 	Statement.text = 'Choose %s people for the Night Shift' % str(numpeople)
 	
 	for player in players:
-		var PlayerButton = preload("res://PlayerButton.tscn").instance()
-		PlayerButton._initialize(player)
-		PlayerButton.text = player['id']
+		var PlayerButton = preload("res://Games/Lizzness/UI/Common/PlayerButton.tscn").instance()
+		PlayerButton.initialize(player)
 		$Panel/CenterContainer/GridContainer.add_child(PlayerButton)
 
 func pre_destroy():
