@@ -1,67 +1,133 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Games/Lizzness/UI/Guest/Lobby_GUEST.gd" type="Script" id=1]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Host/Whiteboard.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Host/WB-box-1.png" type="Texture" id=4]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Host/WB-circle-1.png" type="Texture" id=5]
 
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 8
+font_data = ExtResource( 3 )
 
-
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = ExtResource( 3 )
 
 [node name="LobbyUI" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -6.89581
-margin_right = -6.89581
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Panel" type="Panel" parent="."]
-margin_left = 9.0
-margin_right = 517.0
-margin_bottom = 341.0
+[node name="Whiteboard" type="TextureRect" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
-margin_left = 16.2471
-margin_top = 15.8147
-margin_right = 344.247
-margin_bottom = 34.8147
-bbcode_text = "Waiting Room"
-tab_size = 5
-text = "Waiting Room"
+[node name="Header" type="Label" parent="."]
+modulate = Color( 0, 0.180392, 1, 1 )
+margin_left = 288.085
+margin_top = 153.104
+margin_right = 640.085
+margin_bottom = 169.104
+rect_scale = Vector2( 4, 4 )
+custom_fonts/font = SubResource( 2 )
+text = "Waiting for Players..."
+percent_visible = -0.05
 
-[node name="RoomID" type="RichTextLabel" parent="Panel"]
-margin_left = 19.4149
-margin_top = 89.4521
-margin_right = 137.415
-margin_bottom = 108.452
-bbcode_text = "Waiting Room"
-tab_size = 5
-text = "Waiting Room"
+[node name="WB-box-1" type="TextureRect" parent="."]
+editor/display_folded = true
+modulate = Color( 0, 0.560784, 0.129412, 1 )
+margin_left = 413.234
+margin_top = 322.506
+margin_right = 493.234
+margin_bottom = 342.506
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
 
-[node name="RCBox" type="ColorRect" parent="Panel"]
-margin_left = 16.0
-margin_top = 34.0
-margin_right = 331.0
-margin_bottom = 74.0
-color = Color( 0.196078, 0.176471, 0.337255, 1 )
-
-[node name="RCText" type="Label" parent="Panel/RCBox"]
-margin_left = 3.58582
-margin_top = 2.51422
-margin_right = 240.586
-margin_bottom = 35.5142
-text = "Connected to Room ID"
+[node name="Label" type="Label" parent="WB-box-1"]
+margin_left = 1.65142
+margin_top = 1.71187
+margin_right = 78.6514
+margin_bottom = 18.7119
+custom_fonts/font = SubResource( 1 )
+text = "Obama"
+align = 1
 valign = 1
 
-[node name="StartButton" type="Button" parent="Panel"]
-margin_left = 20.8378
-margin_top = 296.0
-margin_right = 471.838
-margin_bottom = 323.0
-text = "Start Game"
+[node name="WB-box-2" type="TextureRect" parent="."]
+editor/display_folded = true
+modulate = Color( 0, 0.396078, 0.658824, 1 )
+margin_left = 413.234
+margin_top = 426.112
+margin_right = 493.234
+margin_bottom = 446.112
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
 
-[node name="PlayerList" type="RichTextLabel" parent="Panel"]
-margin_left = 20.0
-margin_top = 114.0
-margin_right = 473.0
-margin_bottom = 290.0
-[connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]
+[node name="Label" type="Label" parent="WB-box-2"]
+margin_left = 1.65142
+margin_top = 1.71187
+margin_right = 78.6514
+margin_bottom = 18.7119
+custom_fonts/font = SubResource( 1 )
+text = "xbox_off"
+align = 1
+valign = 1
+
+[node name="WB-box-3" type="TextureRect" parent="."]
+modulate = Color( 0.843137, 0, 0, 1 )
+margin_left = 803.452
+margin_top = 322.506
+margin_right = 883.452
+margin_bottom = 342.506
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="WB-box-3"]
+margin_left = 1.02206
+margin_top = 1.71187
+margin_right = 78.0221
+margin_bottom = 18.7119
+custom_fonts/font = SubResource( 1 )
+text = "KrusKrab"
+align = 1
+valign = 1
+
+[node name="WB-circle-1" type="TextureRect" parent="."]
+modulate = Color( 0.592157, 0, 1, 1 )
+margin_left = 1520.69
+margin_top = 745.059
+margin_right = 1560.69
+margin_bottom = 785.059
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="WB-circle-1"]
+margin_left = -80.1923
+margin_top = 19.1698
+margin_right = -0.192291
+margin_bottom = 27.1698
+custom_fonts/font = SubResource( 3 )
+text = "Room Code:"
+
+[node name="RCode" type="Label" parent="."]
+modulate = Color( 0.0588235, 0.698039, 0.352941, 1 )
+margin_left = 1556.3
+margin_top = 824.862
+margin_right = 1652.3
+margin_bottom = 848.862
+custom_fonts/font = SubResource( 4 )
+text = "1234"
