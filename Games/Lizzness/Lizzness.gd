@@ -3,8 +3,8 @@ extends Node
 signal PLAYER_LIST_CHANGE
 signal GAME_STATE_CHANGED
 
-export var MIN_PLAYERS: int = 2
-export var MAX_PLAYERS: int = 8
+export var MIN_PLAYERS: int = 5
+export var MAX_PLAYERS: int = 18
 
 enum {STATE_LOBBY, STATE_PLAYING, STATE_DISSOLVING}
 enum {GAME_DAY_MORNING, GAME_DAY_WORKDAY, GAME_DAY_AFTERNOON, GAME_DAY_MIDNIGHT}
@@ -57,7 +57,7 @@ remote func game_state_change(game_state, day_number, day_state, human_win_count
 		'human_win_count':{'change':false},
 	}
 	if game_state != self.game_state:
-		state_delta['game_state'] = {'change':true,'old':self.game_state,'new':games_state}
+		state_delta['game_state'] = {'change':true,'old':self.game_state,'new':game_state}
 	if day_number != self.day_number:
 		state_delta['day_number'] = {'old':self.day_number,'new':day_number}
 	if day_state != self.day_state:
@@ -73,21 +73,31 @@ remote func game_state_change(game_state, day_number, day_state, human_win_count
 	self.human_win_count = human_win_count
 	
 	emit_signal('GAME_STATE_CHANGED', game_state, day_number, day_state)
-	if player.role == CLIENT_ROLE.SCREEN:
-		do_screen_role_ui_change(state_delta)
+	if player.role == CLIENT_ROLE.HOST:
+		do_host_role_ui_change(state_delta)
 	else:
-		do_player_role_ui_change(state_delta)
+		do_guest_role_ui_change(state_delta)
 
-func do_screen_role_ui_change(state_delta):
+func do_host_role_ui_change(state_delta):
+	var ui_base = 'res://Games/Lizzness/UI/Host/%s'
 	if state_delta['day_state']['change']:
 		if state_delta['day_state']['new'] == GAME_DAY_MORNING:
-			get_node('/root/Client').ui_change(preload('res://MorningMeetingUIScreen.tscn'))
+			get_node('/root/Client').ui_change(ui_base % 'MorningMeeting_HOST.tscn')
 		elif state_delta['day_state']['new'] == GAME_DAY_WORKDAY:
-			get_node('/root/Client').ui_change(preload('res://WorkDayUIScreen.tscn'))
+			get_node('/root/Client').ui_change(ui_base % 'Workday_HOST.tscn')
 		elif state_delta['day_state']['new'] == GAME_DAY_AFTERNOON:
-			get_node('/root/Client').ui_change(preload('res://EndOfDayUIScreen.tscn'))
+			get_node('/root/Client').ui_change(ui_base % 'AfternoonMeeting_HOST.tscn')
 		else:
-			get_node('/root/Client').ui_change(preload('res://NightUIScreen.tscn'))
+			get_node('/root/Client').ui_change(ui_base % 'Night_HOST.tscn')
 
-func do_player_role_ui_change(state_delta):
-	pass
+func do_guest_role_ui_change(state_delta):
+	var ui_base = 'res://Games/Lizzness/UI/Guest/%s'
+	if state_delta['day_state']['change']:
+		if state_delta['day_state']['new'] == GAME_DAY_MORNING:
+			get_node('/root/Client').ui_change(ui_base % 'MorningMeeting_GUEST.tscn')
+		elif state_delta['day_state']['new'] == GAME_DAY_WORKDAY:
+			get_node('/root/Client').ui_change(ui_base % 'Workday_GUEST.tscn')
+		elif state_delta['day_state']['new'] == GAME_DAY_AFTERNOON:
+			get_node('/root/Client').ui_change(ui_base % 'AfternoonMeeting_GUEST.tscn')
+		else:
+			get_node('/root/Client').ui_change(ui_base % 'Night_GUEST.tscn')

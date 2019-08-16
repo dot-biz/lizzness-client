@@ -1,16 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Games/Lizzness/UI/Guest/Lobby_GUEST.gd" type="Script" id=1]
+[ext_resource path="res://Games/Lizzness/UI/Host/Lobby_HOST.gd" type="Script" id=1]
 [ext_resource path="res://Games/Lizzness/Assets/UI/Host/Whiteboard.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Games/Lizzness/Assets/UI/Host/WB-box-1.png" type="Texture" id=4]
-[ext_resource path="res://Games/Lizzness/Assets/UI/Host/WB-circle-1.png" type="Texture" id=5]
-
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 3 )
+[ext_resource path="res://Games/Lizzness/UI/Host/Lobby_HOST_PlayerBoxes.gd" type="Script" id=4]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/WB-shapes/WB-circle-1.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
-size = 8
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -43,70 +39,16 @@ margin_top = 153.104
 margin_right = 640.085
 margin_bottom = 169.104
 rect_scale = Vector2( 4, 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Waiting for Players..."
-percent_visible = -0.05
 
-[node name="WB-box-1" type="TextureRect" parent="."]
-editor/display_folded = true
-modulate = Color( 0, 0.560784, 0.129412, 1 )
-margin_left = 413.234
-margin_top = 322.506
-margin_right = 493.234
-margin_bottom = 342.506
-rect_scale = Vector2( 4, 4 )
-texture = ExtResource( 4 )
-
-[node name="Label" type="Label" parent="WB-box-1"]
-margin_left = 1.65142
-margin_top = 1.71187
-margin_right = 78.6514
-margin_bottom = 18.7119
-custom_fonts/font = SubResource( 1 )
-text = "Obama"
-align = 1
-valign = 1
-
-[node name="WB-box-2" type="TextureRect" parent="."]
-editor/display_folded = true
-modulate = Color( 0, 0.396078, 0.658824, 1 )
-margin_left = 413.234
-margin_top = 426.112
-margin_right = 493.234
-margin_bottom = 446.112
-rect_scale = Vector2( 4, 4 )
-texture = ExtResource( 4 )
-
-[node name="Label" type="Label" parent="WB-box-2"]
-margin_left = 1.65142
-margin_top = 1.71187
-margin_right = 78.6514
-margin_bottom = 18.7119
-custom_fonts/font = SubResource( 1 )
-text = "xbox_off"
-align = 1
-valign = 1
-
-[node name="WB-box-3" type="TextureRect" parent="."]
-modulate = Color( 0.843137, 0, 0, 1 )
-margin_left = 803.452
-margin_top = 322.506
-margin_right = 883.452
-margin_bottom = 342.506
-rect_scale = Vector2( 4, 4 )
-texture = ExtResource( 4 )
-
-[node name="Label" type="Label" parent="WB-box-3"]
-margin_left = 1.02206
-margin_top = 1.71187
-margin_right = 78.0221
-margin_bottom = 18.7119
-custom_fonts/font = SubResource( 1 )
-text = "KrusKrab"
-align = 1
-valign = 1
+[node name="PlayerBoxes" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
 
 [node name="WB-circle-1" type="TextureRect" parent="."]
+editor/display_folded = true
 modulate = Color( 0.592157, 0, 1, 1 )
 margin_left = 1520.69
 margin_top = 745.059
@@ -124,7 +66,7 @@ custom_fonts/font = SubResource( 3 )
 text = "Room Code:"
 
 [node name="RCode" type="Label" parent="."]
-modulate = Color( 0.0588235, 0.698039, 0.352941, 1 )
+modulate = Color( 0, 0.529412, 0.243137, 1 )
 margin_left = 1556.3
 margin_top = 824.862
 margin_right = 1652.3

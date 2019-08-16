@@ -2,7 +2,7 @@ extends Control
 
 signal SERVER_CONNECT
 
-const HARDCODED_SERVER = 'lizzness-backend.my.homelab'
+const HARDCODED_SERVER = 'localhost'
 const HARDCODED_PORT = '12926'
 
 func _ready():

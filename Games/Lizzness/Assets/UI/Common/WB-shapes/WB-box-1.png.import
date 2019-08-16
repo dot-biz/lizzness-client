@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WB-circle-1.png-48d0989f9fc386bf1546452cc38c711c.stex"
+path="res://.import/WB-box-1.png-0f41fb72207524cb6c51f590c9a62bc3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Games/Lizzness/Assets/UI/Host/WB-circle-1.png"
-dest_files=[ "res://.import/WB-circle-1.png-48d0989f9fc386bf1546452cc38c711c.stex" ]
+source_file="res://Games/Lizzness/Assets/UI/Common/WB-shapes/WB-box-1.png"
+dest_files=[ "res://.import/WB-box-1.png-0f41fb72207524cb6c51f590c9a62bc3.stex" ]
 
 [params]
 

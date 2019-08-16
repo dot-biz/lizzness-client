@@ -2,6 +2,7 @@ extends Node
 
 signal PLAYER_LIST_CHANGE
 signal ENABLE_START
+signal UI_CHANGE
 
 var server_cx
 var client_obj
@@ -53,6 +54,9 @@ func _request_join_room(room_code):
 	print('Requesting to join room %s' % str(room_code))
 	client_obj.join_room(room_code)
 
+func set_game(game):
+	self.game_obj = game
+
 func ui_change(path_to_new_ui):
 	#	Initiates a UI change while a game is in-progress, unloading the current
 	#	UI scene and loading an instance of the new one in its place. The new UI
@@ -65,13 +69,15 @@ func ui_change(path_to_new_ui):
 	
 	var old_ui = get_node('/root/UI')
 	old_ui.pre_destroy()
-	self.remove_child(old_ui)
+	get_tree().get_root().remove_child(old_ui)
 	old_ui.queue_free()
 	
 	var new_ui = load(path_to_new_ui).instance()
 	new_ui.set_name('UI')
-	self.add_child(new_ui)
+	get_tree().get_root().add_child(new_ui)
 	new_ui.initialize(client_obj, game_obj)
+	
+	print('Game-type UI change to instance of "' + path_to_new_ui + '"')
 	
 	return new_ui
 
@@ -83,13 +89,15 @@ func ui_change_raw(path_to_new_ui, params):
 	if get_tree().get_root().has_node('UI'):
 		var old_ui = get_node('/root/UI')
 		old_ui.pre_destroy()
-		self.remove_child(old_ui)
+		get_tree().get_root().remove_child(old_ui)
 		old_ui.queue_free()
 	
 	var new_ui = load(path_to_new_ui).instance()
 	new_ui.set_name('UI')
-	self.add_child(new_ui)
+	get_tree().get_root().add_child(new_ui)
 	new_ui.initialize(params)
+	
+	print('Raw UI change to instance of "%s" with params "%s"' % [path_to_new_ui, str(params)])
 	
 	return new_ui
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WB-box-1.png-f46a3628e7e073932ad458960681750f.stex"
+path="res://.import/BOSS_indicator.png-28e9ed696ace919145de093c5cd095ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Games/Lizzness/Assets/UI/Host/WB-box-1.png"
-dest_files=[ "res://.import/WB-box-1.png-f46a3628e7e073932ad458960681750f.stex" ]
+source_file="res://Games/Lizzness/Assets/UI/Common/BOSS_indicator.png"
+dest_files=[ "res://.import/BOSS_indicator.png-28e9ed696ace919145de093c5cd095ef.stex" ]
 
 [params]
 
