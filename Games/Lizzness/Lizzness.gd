@@ -45,6 +45,9 @@ remote func update_player_list(pkt):
 			self.player.nick = player['nick']
 	emit_signal('PLAYER_LIST_CHANGE', connected_players, MIN_PLAYERS, MAX_PLAYERS)
 
+func do_nick_change(new_nick):
+	rpc_id(1, 'change_nick', new_nick)
+
 func _game_start_request():
 	if player.role == CLIENT_ROLE.ADMIN and len(connected_players) >= MIN_PLAYERS:
 		rpc_id(1, 'start_game')

@@ -24,17 +24,8 @@ func initialize(player, game):
 func _player_list_change(players, MIN_PLAYERS, MAX_PLAYERS):
 	print('\t> UI update for new player list %s' % str(players))
 	$Panel/InfoBox/WFPlayers.text = 'Waiting for Players (%s / %s)' % [str(len(players)-1), str(MIN_PLAYERS-1)]
-	#$Panel/PlayerList.text = ''
-	#var counter: int = 1
-	#for player in players:
-	#	var admin_str: String = ''
-	#	if player['role'] == CLIENT_ROLE.ADMIN:
-	#		admin_str = '{#}'
-	#	if player['role'] == CLIENT_ROLE.SCREEN:
-	#		admin_str = '{S}'
-	#	var player_str = '[%s]: %s %s' % [str(counter), player['nick'], admin_str]
-	#	$Panel/PlayerList.text += player_str + '\n'
-	#	counter += 1
+	$Panel/InfoBox/NickChange.placeholder_text = self.player.nick
+	
 	
 	if len(players) >= self.game.MIN_PLAYERS and self.player.role == CLIENT_ROLE.ADMIN:
 		$Panel/StartButton.visible = true
@@ -46,3 +37,19 @@ func _on_StartButton_pressed():
 
 func pre_destroy():
 	pass
+
+func _ui_nick_change_request(new_text):
+	self.game.do_nick_change(new_text)
+	$Panel/InfoBox/NickChange.text = ''
+	$Panel/InfoBox/AcceptButton.visible = false
+	$Panel/InfoBox/ClearButton.visible = false
+
+
+func _on_AcceptButton_pressed():
+	_ui_nick_change_request($Panel/InfoBox/NickChange.text)
+
+
+func _on_ClearButton_pressed():
+	$Panel/InfoBox/NickChange.text = ''
+	$Panel/InfoBox/AcceptButton.visible = false
+	$Panel/InfoBox/ClearButton.visible = false

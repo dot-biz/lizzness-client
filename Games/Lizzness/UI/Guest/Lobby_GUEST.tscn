@@ -1,40 +1,104 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Games/Lizzness/UI/Guest/Lobby_GUEST.gd" type="Script" id=1]
+[ext_resource path="res://Games/Lizzness/UI/Guest/Lobby_GUEST_InfoBox.gd" type="Script" id=2]
+[ext_resource path="res://Games/Lizzness/UI/Common/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/tick-button-n.png" type="Texture" id=5]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/tick-button-p.png" type="Texture" id=6]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/tick-button-h.png" type="Texture" id=7]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/x-button-n.png" type="Texture" id=8]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/x-button-p.png" type="Texture" id=9]
+[ext_resource path="res://Games/Lizzness/Assets/UI/Common/x-button-h.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 4 )
 
 [node name="LobbyUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -6.89581
-margin_right = -6.89581
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 9.0
-margin_right = 517.0
+margin_right = 508.0
 margin_bottom = 573.0
 
 [node name="InfoBox" type="ColorRect" parent="Panel"]
 margin_left = 25.0
 margin_top = 33.0
 margin_right = 478.0
-margin_bottom = 73.0
+margin_bottom = 416.0
 color = Color( 0.196078, 0.176471, 0.337255, 1 )
+script = ExtResource( 2 )
 
 [node name="WFPlayers" type="Label" parent="Panel/InfoBox"]
-margin_left = 254.792
-margin_top = 4.99999
-margin_right = 445.792
-margin_bottom = 35.0
+margin_left = 1.0
+margin_top = 35.0
+margin_right = 454.0
+margin_bottom = 68.0
+theme = ExtResource( 3 )
 text = "Waiting for Players (CUR/MAX)"
+align = 1
 valign = 1
 
 [node name="RCBox" type="Label" parent="Panel/InfoBox"]
-margin_left = 13.9318
-margin_top = 13.2684
-margin_right = 94.9318
-margin_bottom = 27.2684
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 452.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 1 )
 text = "Room Code: 1234"
+align = 1
+valign = 1
+
+[node name="YourNickIs" type="Label" parent="Panel/InfoBox"]
+margin_left = 11.5365
+margin_top = 122.069
+margin_right = 147.536
+margin_bottom = 136.069
+theme = ExtResource( 3 )
+text = "Your nickname is:"
+align = 1
+valign = 1
+
+[node name="ClickTheBox" type="Label" parent="Panel/InfoBox"]
+margin_left = 3.0
+margin_top = 148.0
+margin_right = 452.0
+margin_bottom = 162.0
+theme = ExtResource( 3 )
+text = "(click the box to change it)"
+align = 1
+valign = 1
+
+[node name="NickChange" type="LineEdit" parent="Panel/InfoBox"]
+margin_left = 156.751
+margin_top = 117.359
+margin_right = 392.751
+margin_bottom = 141.359
+theme = ExtResource( 3 )
+align = 1
+placeholder_text = "(nickname here)"
+
+[node name="AcceptButton" type="TextureButton" parent="Panel/InfoBox"]
+visible = false
+margin_left = 402.05
+margin_top = 118.463
+margin_right = 422.05
+margin_bottom = 138.463
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+
+[node name="ClearButton" type="TextureButton" parent="Panel/InfoBox"]
+visible = false
+margin_left = 426.46
+margin_top = 117.631
+margin_right = 446.46
+margin_bottom = 137.631
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
 
 [node name="StartButton" type="Button" parent="Panel"]
 margin_left = 25.2959
@@ -42,4 +106,9 @@ margin_top = 436.333
 margin_right = 476.296
 margin_bottom = 526.333
 text = "Start Game"
+[connection signal="mouse_entered" from="Panel/InfoBox/NickChange" to="Panel/InfoBox" method="_on_NickChange_mouse_entered"]
+[connection signal="text_changed" from="Panel/InfoBox/NickChange" to="Panel/InfoBox" method="_on_NickChange_text_changed"]
+[connection signal="text_entered" from="Panel/InfoBox/NickChange" to="." method="_ui_nick_change_request"]
+[connection signal="pressed" from="Panel/InfoBox/AcceptButton" to="." method="_on_AcceptButton_pressed"]
+[connection signal="pressed" from="Panel/InfoBox/ClearButton" to="." method="_on_ClearButton_pressed"]
 [connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]
